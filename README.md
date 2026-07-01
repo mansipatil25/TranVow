@@ -101,5 +101,4 @@ MIT License — see [LICENSE](LICENSE) for details.
 ## 🧑‍💻 Built By
 
 **Mansi Patil** — BE Computer Engineering, SVKM's Institute of Technology, Dhule
-Portfolio: [mansipatil25.github.io/portfolio](https://mansipatil25.github.io/portfolio)
 GitHub: [github.com/mansipatil25](https://github.com/mansipatil25)
