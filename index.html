@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TransVox — Speak Any Language</title>
+  <meta name="description" content="TransVox — free real-time voice & text translation app supporting 20+ languages. Speak or type, get instant translation with audio playback, subtitles, dark/light mode, and downloadable results." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-orb orb3"></div>
+
+  <div class="app-container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="23"/>
+            <line x1="8" y1="23" x2="16" y2="23"/>
+          </svg>
+        </div>
+        <span class="logo-text">TransVox</span>
+      </div>
+      <div class="header-right">
+        <div class="header-badge">100% Free</div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" aria-label="Toggle theme">
+          <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1 class="hero-title">Speak.<span class="accent"> Translate.</span> Connect.</h1>
+      <p class="hero-sub">Speak or type in any language — get instant translation with audio playback and subtitles.</p>
+    </section>
+
+    <!-- Mode Tabs -->
+    <div class="mode-tabs">
+      <button class="mode-tab active" id="voiceModeTab">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+        Voice
+      </button>
+      <button class="mode-tab" id="textModeTab">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+        Type Text
+      </button>
+    </div>
+
+    <!-- Language Selector -->
+    <div class="lang-panel">
+      <div class="lang-box">
+        <label class="lang-label">Detected / Source Language</label>
+        <select id="sourceLang" class="lang-select"></select>
+      </div>
+
+      <button class="swap-btn" id="swapLangs" title="Swap languages">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+          <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+        </svg>
+      </button>
+
+      <div class="lang-box">
+        <label class="lang-label">Translate To</label>
+        <select id="targetLang" class="lang-select"></select>
+      </div>
+    </div>
+
+    <!-- Text Input Mode -->
+    <div class="text-input-section" id="textInputSection">
+      <textarea class="text-input-area" id="textInputArea" placeholder="Type what you want to translate…" maxlength="500"></textarea>
+      <button class="translate-text-btn" id="translateTextBtn">Translate</button>
+    </div>
+
+    <!-- Voice Mode: Record Button Area -->
+    <div class="record-section" id="voiceSection">
+      <div class="record-ring" id="recordRing">
+        <button class="record-btn" id="recordBtn" aria-label="Hold to record">
+          <svg class="mic-icon" id="micIcon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="23"/>
+            <line x1="8" y1="23" x2="16" y2="23"/>
+          </svg>
+        </button>
+      </div>
+      <p class="record-hint" id="recordHint">Hold to record · Release to translate</p>
+
+      <!-- Waveform visualizer -->
+      <div class="waveform" id="waveform">
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      </div>
+    </div>
+
+    <!-- Results Panel -->
+    <div class="results-grid" id="resultsGrid">
+
+      <!-- Original -->
+      <div class="result-card" id="originalCard">
+        <div class="card-header">
+          <span class="card-tag original-tag">Original</span>
+          <button class="copy-btn" id="copyOriginal" title="Copy text">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <div class="card-lang-badge" id="detectedLangBadge">English</div>
+        <p class="card-text" id="originalText">Your speech will appear here…</p>
+      </div>
+
+      <!-- Translation -->
+      <div class="result-card translation-card" id="translationCard">
+        <div class="card-header">
+          <span class="card-tag translation-tag">Translation</span>
+          <div class="card-actions">
+            <button class="play-btn" id="playTranslation" title="Play audio">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Play
+            </button>
+            <button class="copy-btn" id="copyTranslation" title="Copy text">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="card-lang-badge translation-badge" id="targetLangBadge">Spanish</div>
+        <p class="card-text" id="translationText">Translation will appear here…</p>
+        <div class="subtitle-row" id="subtitleRow" style="display:none">
+          <span class="subtitle-label">English subtitle:</span>
+          <span class="subtitle-text" id="subtitleText"></span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Download Row -->
+    <div class="download-row">
+      <button class="download-btn" id="downloadBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download as .txt
+      </button>
+    </div>
+
+    <!-- Status bar -->
+    <div class="status-bar" id="statusBar">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusMsg">Ready — press and hold the mic to start</span>
+    </div>
+
+    <!-- History -->
+    <div class="history-section" id="historySection" style="display:none">
+      <div class="history-header">
+        <h3 class="history-title">Translation History</h3>
+        <button class="clear-btn" id="clearHistory">Clear all</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </div>
+
+    <footer class="footer-note">
+      <p>TransVox · 100% Free · Built by Mansi Patil · No API key needed</p>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
